@@ -1,7 +1,8 @@
 version: '2'
 services:
-  db:
+  mysql:
     build: ./db
+    container_name: mysql
     volumes:
       - ./db/mysql_data:/var/lib/mysql
     environment:
@@ -11,16 +12,17 @@ services:
       - MYSQL_PASSWORD=cake
   web:
     build: ./web
+    container_name: web
     ports:
       - 80:80
     volumes:
-      - ./project:/var/www/html
+      - ./web/project:/var/www/html
     depends_on:
-      - db
+      - mysql
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
     container_name: myadmin
     ports:
       - 8080:80
     links:
-      - db
+      - mysql

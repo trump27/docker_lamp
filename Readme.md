@@ -9,11 +9,18 @@
 
 projectにソースを格納
 ```bash
-git clone https://github.com/xxxx.git ./project
+rm ./web/project/empty
+git clone https://github.com/xxxx.git ./web/project
 ```
 
 ## build
 
 ```bash
 docker-compose up -d
+```
+## other
+
+```bash
+docker rm `docker ps -a -q`
+docker rm
 ```
