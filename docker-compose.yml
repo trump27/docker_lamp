@@ -1,0 +1,26 @@
+version: '2'
+services:
+  db:
+    build: ./db
+    volumes:
+      - ./db/mysql_data:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=docker
+      - MYSQL_USER=docker
+      - MYSQL_PASSWORD=docker
+  web:
+    build: ./web
+    ports:
+      - '80:80'
+    volumes:
+      - ./html:/var/www/html
+    depends_on:
+      - db
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: myadmin
+    ports:
+      - '8080:80'
+    links:
+      - db
