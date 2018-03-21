@@ -31,7 +31,7 @@ RUN a2enmod rewrite && \
 # Example, deploy a default CakePHP 3 installation from source #
 ################################################################
 
-ADD ../project /var/www/html/
+ADD project /var/www/html/
 
 # Set workdir (no more cd from now)
 WORKDIR /var/www/html

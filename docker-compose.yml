@@ -1,8 +1,8 @@
 version: '2'
 services:
-  mysql:
+  dbmysql:
     build: ./db
-    container_name: mysql
+    container_name: dbmysql
     volumes:
       - ./db/mysql_data:/var/lib/mysql
     environment:
@@ -18,11 +18,11 @@ services:
     volumes:
       - ./web/project:/var/www/html
     depends_on:
-      - mysql
+      - dbmysql
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
     container_name: myadmin
     ports:
       - 8080:80
     links:
-      - mysql
+      - dbmysql
