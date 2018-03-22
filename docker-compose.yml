@@ -1,8 +1,8 @@
 version: '2'
 services:
-  dbmysql:
+  mysql:
     build: ./db
-    container_name: dbmysql
+    container_name: mysql
     volumes:
       - ./db/mysql_data:/var/lib/mysql
     environment:
@@ -18,11 +18,17 @@ services:
     volumes:
       - ./web/project:/var/www/html
     depends_on:
-      - dbmysql
+      - mysql
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
-    container_name: myadmin
+    environment:
+      - PMA_ARBITRARY=1
+      - PMA_HOST=mysql
+      - PMA_USER=root
+      - PMA_PASSWORD=root
     ports:
       - 8080:80
     links:
-      - dbmysql
+      - mysql
+    volumes:
+      - /sessions
