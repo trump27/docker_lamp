@@ -37,16 +37,15 @@ ADD project /var/www/html/
 WORKDIR /var/www/html
 
 # Composer install application
-RUN composer -n install
+# RUN composer -n install
 
-RUN chmod +x bin/cake \
-    && bin/cake migrations migrate \
-    && bin/cake migrations seed
+# RUN chmod +x bin/cake \
+#    && bin/cake migrations migrate \
+#    && bin/cake migrations seed
 
 # sqliteを使う場合、htmlディレクトリに書き込み権限が必要
-
-RUN chgrp -R www-data logs tmp && \
-    chmod -R g+rw logs tmp
+# RUN chgrp -R www-data logs tmp && \
+#    chmod -R g+rw logs tmp
 
 ####################################################
 # Expose port and run Apache webserver             #
