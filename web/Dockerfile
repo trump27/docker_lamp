@@ -1,6 +1,6 @@
 FROM ubuntu:xenial
 
-# Install packages and PHP 7
+# Install packages and PHP 7.0
 ENV DEBIAN_FRONTEND noninteractive
 RUN apt-get update -q && apt-get install -qqy \
     git-core \
@@ -21,7 +21,7 @@ RUN apt-get update -q && apt-get install -qqy \
 
 # Add apache config to enable .htaccess and do some stuff you want
 COPY apache_default /etc/apache2/sites-available/000-default.conf
-COPY php.ini /usr/local/etc/php/
+COPY php.ini /etc/php/7.0/apache2/conf.d/
 
 # Enable mod rewrite and listen to localhost
 RUN a2enmod rewrite && \
